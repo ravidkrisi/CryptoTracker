@@ -19,6 +19,7 @@ extension Double {
         let formmater = NumberFormatter()
         formmater.usesGroupingSeparator = true
         formmater.numberStyle = .currency
+        formmater.currencyCode = "usd" // <- change currency
         formmater.minimumFractionDigits = 2
         formmater.maximumFractionDigits = 2
         return formmater
@@ -44,6 +45,7 @@ extension Double {
     private var currenctFormmater6: NumberFormatter {
         let formmater = NumberFormatter()
         formmater.usesGroupingSeparator = true
+        formmater.currencyCode = "usd" // <- change currency
         formmater.numberStyle = .currency
         formmater.minimumFractionDigits = 2
         formmater.maximumFractionDigits = 6

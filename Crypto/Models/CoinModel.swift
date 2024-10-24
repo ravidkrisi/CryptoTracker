@@ -7,7 +7,8 @@
 
 import Foundation
 
-struct CoinModel: Codable, Identifiable {
+struct CoinModel: Codable, Identifiable, Equatable {
+    
     let id, symbol, name: String
     let image: String
     let currentPrice: Double
@@ -62,6 +63,10 @@ struct CoinModel: Codable, Identifiable {
     
     var rank: Int {
         Int(marketCapRank ?? 0)
+    }
+    
+    static func == (lhs: CoinModel, rhs: CoinModel) -> Bool {
+        lhs.id == rhs.id
     }
 }
 
