@@ -31,13 +31,18 @@ struct HomeView: View {
                 
                 columnTitles
                 
-                if !showPortfolio {
-                    allCoinsList
-                    .transition(.move(edge: .leading))
+                Group {
+                    if !showPortfolio {
+                        allCoinsList
+                            .transition(.move(edge: .leading))
+                    }
+                    if showPortfolio {
+                        portfolioCoinsList
+                            .transition(.move(edge: .trailing))
+                    }
                 }
-                if showPortfolio {
-                    portfolioCoinsList
-                        .transition(.move(edge: .trailing))
+                .refreshable {
+                    vm.reloadData()
                 }
                 Spacer(minLength: 0)
             }

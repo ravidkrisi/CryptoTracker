@@ -61,6 +61,11 @@ class HomeViewModel: ObservableObject {
         portfolioDataService.updatePortfolio(coin: coin, amount: amount)
     }
     
+    func reloadData() {
+        coinDataService.getCoins()
+        marketDataService.getData()
+    }
+    
     private func mapGlobalMarketData(marketDataModel: MarketDataModel?, portfolioCoins: [CoinModel]) -> [StatisticsModel] {
         var stats: [StatisticsModel] = []
         
