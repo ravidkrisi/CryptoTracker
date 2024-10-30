@@ -18,46 +18,48 @@ struct HomeView: View {
     @State private var showDetailView: Bool = false
      
     var body: some View {
-        ZStack {
-            Color.theme.background
-                .sheet(isPresented: $showPortfolioView) {
-                    PortfolioView()
-                        .environmentObject(vm)
-                }
-            
-            VStack {
-                header
-                
-                HomeStatsView(showPortfolio: $showPortfolio)
-                
-                SearchBarView(searchText: $vm.searchText)
-                
-                columnTitles
-                
-                Group {
-                    if !showPortfolio {
-                        allCoinsList
-                            .transition(.move(edge: .leading))
+            ZStack {
+                Color.theme.background
+                    .sheet(isPresented: $showPortfolioView) {
+                        PortfolioView()
+                            .environmentObject(vm)
                     }
-                    if showPortfolio {
-                        portfolioCoinsList
-                            .transition(.move(edge: .trailing))
+                
+                VStack {
+                    header
+                    
+                    HomeStatsView(showPortfolio: $showPortfolio)
+                    
+                    SearchBarView(searchText: $vm.searchText)
+                    
+                    columnTitles
+                    
+                    Group {
+                        if !showPortfolio {
+                            allCoinsList
+                                .transition(.move(edge: .leading))
+                        }
+                        if showPortfolio {
+                            portfolioCoinsList
+                                .transition(.move(edge: .trailing))
+                        }
                     }
+                    .refreshable {
+                        vm.reloadData()
+                    }
+                    Spacer(minLength: 0)
                 }
-                .refreshable {
-                    vm.reloadData()
-                }
-                Spacer(minLength: 0)
             }
+            .navigationDestination(isPresented: $showDetailView, destination: {
+                if let coin = selectedCoin {
+                    DetailView(coin: coin)
+                }
+            })
         }
-        .background(
-            NavigationLink(destination: DetailLoadingView(coin: $selectedCoin), isActive: $showDetailView, label: { EmptyView() })
-        )
-    }
 }
 
 #Preview {
-    NavigationView {
+    NavigationStack {
         HomeView()
             .environmentObject(HomeViewModel())
     }
@@ -114,7 +116,7 @@ extension HomeView {
     private func segue(coin: CoinModel) {
         selectedCoin = coin
         showDetailView.toggle()
-        print("tapped now")
+        print("tapped now \(showDetailView)")
     }
     
     private var portfolioCoinsList: some View {
