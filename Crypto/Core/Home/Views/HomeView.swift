@@ -40,8 +40,14 @@ struct HomeView: View {
                                 .transition(.move(edge: .leading))
                         }
                         if showPortfolio {
-                            portfolioCoinsList
-                                .transition(.move(edge: .trailing))
+                            ZStack {
+                                if vm.portfolioCoins.isEmpty && vm.searchText.isEmpty {
+                                    portfolioEmptyText
+                                    } else {
+                                    portfolioCoinsList
+                                }
+                            }
+                            .transition(.move(edge: .trailing))
                         }
                     }
                     .refreshable {
@@ -123,16 +129,29 @@ extension HomeView {
     }
     
     private var portfolioCoinsList: some View {
-        List {
-            ForEach(vm.portfolioCoins) { coin in
-                CoinRowView(coin: coin, showHoldingsColumn: true)
-                    .listRowInsets(.init(top: 10, leading: 0, bottom: 10, trailing: 10))
-                    .onTapGesture {
-                        segue(coin: coin)
-                    }
+            List {
+                ForEach(vm.portfolioCoins) { coin in
+                    CoinRowView(coin: coin, showHoldingsColumn: true)
+                        .listRowInsets(.init(top: 10, leading: 0, bottom: 10, trailing: 10))
+                        .onTapGesture {
+                            segue(coin: coin)
+                        }
+                }
             }
+            .listStyle(.plain)
+
+    }
+    
+    private var portfolioEmptyText: some View {
+        HStack {
+            Text("press")
+            Image(systemName: "plus.circle")
+            Text("to add coins")
         }
-        .listStyle(.plain)
+        .padding(.vertical, 50)
+        .font(.callout)
+        .foregroundStyle(Color.theme.accent)
+        .fontWeight(.medium)
     }
     
     private var columnTitles: some View {
