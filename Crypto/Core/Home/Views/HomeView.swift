@@ -59,6 +59,7 @@ struct HomeView: View {
                     SettingsView()
                 }
             }
+            .ignoresSafeArea()
             .navigationDestination(isPresented: $showDetailView, destination: {
                 DetailLoadingView(coin: $selectedCoin)
             })
@@ -117,6 +118,7 @@ extension HomeView {
                     .onTapGesture {
                         segue(coin: coin)
                     }
+                    .listRowBackground(Color.clear)
             }
         }
         .listStyle(.plain)
@@ -136,6 +138,7 @@ extension HomeView {
                         .onTapGesture {
                             segue(coin: coin)
                         }
+                        .listRowBackground(Color.clear)
                 }
             }
             .listStyle(.plain)

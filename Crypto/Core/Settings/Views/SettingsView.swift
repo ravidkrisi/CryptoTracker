@@ -17,13 +17,21 @@ struct SettingsView: View {
     
     var body: some View {
         NavigationStack {
-            List {
-                infoSection
-                coinGeckoSection
+            ZStack {
+                Color.theme.background
+                    .ignoresSafeArea()
+                
+                List {
+                    infoSection
+                        .listRowBackground(Color.theme.background.opacity(0.5))
+                    coinGeckoSection
+                        .listRowBackground(Color.theme.background.opacity(0.5))
+                }
+                .scrollContentBackground(.hidden)
+                .font(.headline)
+                .tint(.blue)
+                .listStyle(.grouped)
             }
-            .font(.headline)
-            .tint(.blue)
-            .listStyle(.grouped)
             .navigationTitle("Settings")
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
