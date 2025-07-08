@@ -17,7 +17,7 @@ struct PortfolioView: View {
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 0) {
                     SearchBarView(searchText: $vm.searchText)
@@ -30,7 +30,6 @@ struct PortfolioView: View {
                 }
             }
             .background(Color.theme.background)
-            .ignoresSafeArea()
             .navigationTitle("Edit Portfolio")
             .toolbar() {
                 ToolbarItem(placement: .topBarLeading) {
@@ -57,8 +56,10 @@ struct PortfolioView: View {
 }
 
 #Preview {
-    PortfolioView()
-        .environmentObject(DeveloperPreview.shared.homeVM)
+    NavigationStack {
+        PortfolioView()
+            .environmentObject(DeveloperPreview.shared.homeVM)
+    }
 }
 
 extension PortfolioView {

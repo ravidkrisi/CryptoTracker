@@ -20,6 +20,7 @@ struct HomeView: View {
     var body: some View {
             ZStack {
                 Color.theme.background
+                    .ignoresSafeArea()
                     .sheet(isPresented: $showPortfolioView) {
                         PortfolioView()
                             .environmentObject(vm)
@@ -59,7 +60,6 @@ struct HomeView: View {
                     SettingsView()
                 }
             }
-            .ignoresSafeArea()
             .navigationDestination(isPresented: $showDetailView, destination: {
                 DetailLoadingView(coin: $selectedCoin)
             })
