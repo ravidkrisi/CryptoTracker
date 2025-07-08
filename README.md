@@ -18,14 +18,12 @@ A modern cryptocurrency tracking app built with **SwiftUI** for iOS. Track live 
 ---
 
 ## Screenshots
+<p align="center">
+  <img src="Crypto/Screenshots/screenshot-1.png" width="200">
+   <img src="Crypto/Screenshots/screenshot-2.png" width="200">
+   <img src="Crypto/Screenshots/screenshot-3.png" width="200">
+</p>
 
-> _Add screenshots of the app here_
-
-| Home | Portfolio | Coin Detail |
-|------|-----------|------------|
-| ![Home](docs/screenshots/home.png) | ![Portfolio](docs/screenshots/portfolio.png) | ![Detail](docs/screenshots/detail.png) |
-
----
 
 ## Getting Started
 
